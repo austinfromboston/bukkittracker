@@ -12,7 +12,7 @@ class InitialDatabase < ActiveRecord::Migration
       t.integer "amount"
       t.datetime "completed_at"
     end
-    add_index "bandwith_usages", ["batch_id"], :name => "index_bandwidth_usage_batch_id"
+    add_index "bandwidth_usages", ["batch_id"], :name => "index_bandwidth_usage_batch_id"
   end
 
   def self.down

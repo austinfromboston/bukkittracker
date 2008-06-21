@@ -11,7 +11,7 @@
 
 ActiveRecord::Schema.define(:version => 20080621004653) do
 
-  create_table "bandwidth_usages", :force => true do |t|
+  create_table "bandwidth_uses", :force => true do |t|
     t.integer  "batch_id"
     t.string   "source"
     t.string   "action"
@@ -20,10 +20,12 @@ ActiveRecord::Schema.define(:version => 20080621004653) do
     t.datetime "completed_at"
   end
 
-  add_index "bandwidth_usages", ["batch_id"], :name => "index_bandwidth_usage_batch_id"
+  add_index "bandwidth_uses", ["batch_id"], :name => "index_bandwidth_use_batch_id"
 
   create_table "batches", :force => true do |t|
     t.string   "filename"
+    t.string   "size"
+    t.string   "content_type"
     t.datetime "closed_at"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -1,0 +1,7 @@
+.index.batch
+  %ul
+    - @batches.each do |batch|
+      %li
+        = batch.id
+        = batch.size
+        = batch.public_filename

@@ -1,0 +1,10 @@
+!!!
+%html
+  %head
+    %title
+      = yield( :current_action ) || current_action
+  %body
+    #header
+    #main
+      = yield
+    #footer

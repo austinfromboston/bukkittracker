@@ -1,0 +1,13 @@
+- content_for :current_action do
+  Upload Batch Records
+
+.upload.form
+  - form_for @batch, :html => { :multipart => true }  do |f|
+    %p
+      %label{:for => 'amazon_csv'}
+        Upload Amazon s3 log file
+      = f.file_field :uploaded_data
+    %p.submit
+      = f.submit "Upload"
+
+

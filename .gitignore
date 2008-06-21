@@ -1,2 +1,5 @@
 log
 db/*sqlite3
+config/mongrel_cluster.yml
+public/batches
+tmp

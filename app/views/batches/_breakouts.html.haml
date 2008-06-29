@@ -5,6 +5,7 @@
     - quantities = Bukkit::S3.quantities( entries )
     - expenses = Bukkit::S3.expenses( entries )
     - expenses.each do |usage_type, dollars|
+      - next if usage_type == :all
       %tr
         %td
           %h4
@@ -21,6 +22,6 @@
       %td
       %td
         \$
-        = expenses.values.inject(&:+)
+        = expenses[:all]
       
 

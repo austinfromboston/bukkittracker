@@ -10,7 +10,7 @@ class InitialDatabase < ActiveRecord::Migration
       t.integer "batch_id"
       t.string  "source", "request_method", "usage_type", "units"
       t.integer "amount"
-      t.datetime "completed_at"
+      t.datetime "completed_at", "started_at"
     end
     add_index "bandwidth_uses", ["batch_id"], :name => "index_bandwidth_use_batch_id"
   end

@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20080621004653) do
     t.string   "units"
     t.integer  "amount"
     t.datetime "completed_at"
+    t.datetime "started_at"
   end
 
   add_index "bandwidth_uses", ["batch_id"], :name => "index_bandwidth_use_batch_id"

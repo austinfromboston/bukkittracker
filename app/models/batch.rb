@@ -29,6 +29,7 @@ class Batch < ActiveRecord::Base
             :source       => csv_data[:resource], 
             :usage_type   => usage_key.to_s,
             :units        => Bukkit::S3::UNITS[ usage_key ],
+            :started_at   => Time.parse(csv_data[:start_time] ),
             :completed_at => Time.parse(csv_data[:end_time] ),
             :request_method => Bukkit::S3::REQUEST_METHODS.select { |method, value| 
                 value = [ value ] unless value.is_a?(Array)

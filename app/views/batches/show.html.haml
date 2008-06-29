@@ -1,7 +1,19 @@
 .show.batch
+  Batch
   = @batch.id
-  = @batch.size
-  = @batch.public_filename
+  .file
+    Uploaded 
+    = @batch.filename
+  .size
+    = "%0.2f MB" % ( @batch.size.to_f / 1.megabyte )
+  .close_date
+    Closed At:
+    = @batch.closed_at.to_s(:short)
+  .period
+    Period:
+    = @batch.entries.minimum(:started_at).to_s(:short)
+    \-
+    = @batch.entries.maximum(:completed_at).to_s(:short)
 %h2 
   All Entries
   = link_to "Download", formatted_batch_path( @batch.id, 'csv' )
@@ -17,7 +29,7 @@
     %h3
       = "#{source}: #{qty}"
       entries
-      - source_total = Bukkit::S3.expenses( @batch.entries.internal.by_source( source ) ).values.inject(&:+) 
+      - source_total = Bukkit::S3.expenses( @batch.entries.internal.by_source( source ) )[:all]
       - internal_total += source_total
       = ":: $#{source_total}"
     -#= render :partial => 'breakouts', :locals => { :entries => @batch.entries.internal.by_source( source ) }
@@ -26,7 +38,9 @@
   \$
   = internal_total
 %hr
-%h2 Billable Use
+%h2 
+  Billable Use
+  = link_to "Download", formatted_batch_path( @batch.id, 'csv', :query => 'billable' )
 = render :partial => 'breakouts', :locals => { :entries => @batch.entries.billable }
 
 - billable_total = 0
@@ -36,7 +50,7 @@
     %h3
       = "#{source}: #{qty}"
       entries
-      - source_total = Bukkit::S3.expenses( @batch.entries.billable.by_source( source ) ).values.inject(&:+) 
+      - source_total = Bukkit::S3.expenses( @batch.entries.billable.by_source( source ) )[:all]
       - billable_total += source_total
       = ":: $#{source_total}"
     -#= render :partial => 'breakouts', :locals => { :entries => @batch.entries.billable.by_source( source ) }

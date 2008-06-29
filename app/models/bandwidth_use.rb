@@ -1,9 +1,10 @@
 class BandwidthUse < ActiveRecord::Base
   belongs_to :batch
 
-  named_scope :billable, :conditions => "source LIKE '%.org%'" 
+  named_scope :billable, :conditions => "source LIKE '%.%' AND source != 'radicaldesigns.org'" 
 
-  named_scope :internal, :conditions => "source LIKE '%radicaldesigns' OR source LIKE '%-default' OR source = NULL"
+  #named_scope :internal, :conditions => "source LIKE '%radicaldesigns' OR source LIKE '%-default' OR source = NULL"
+  named_scope :internal, :conditions => "source NOT LIKE '%.%' or source = 'radicaldesigns.org'"
 
   named_scope :storage,         :conditions => [ "usage_type = ?", "storage" ]
   named_scope :downloads,       :conditions => [ "usage_type = ?", "download" ]

@@ -28,6 +28,9 @@ describe "Bukkit::S3" do
     it "prices uploads" do
       Bukkit::S3.expenses( @batch.entries )[:uploads].should == 0.0
     end
+    it "has a combined price" do
+      Bukkit::S3.expenses( @batch.entries )[:all].should == 5.23
+    end
   end
 
   describe "charges" do
@@ -49,6 +52,9 @@ describe "Bukkit::S3" do
     end
     it "charges for uploads" do
       Bukkit::S3.charges( @batch.entries )[:uploads].should == 0.0
+    end
+    it "has a combined charge" do
+      Bukkit::S3.charges( @batch.entries )[:all].should == 5.23
     end
   end
 

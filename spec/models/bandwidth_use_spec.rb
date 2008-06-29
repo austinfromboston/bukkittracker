@@ -18,11 +18,11 @@ describe "BandwidthUse" do
       @batch.parse_s3_report
     end
     it "billable returns all records with a .org in the source" do
-      BandwidthUse.billable.count.should == 1707
+      BandwidthUse.billable.count.should == 1736
     end
 
     it "internal - grabs items with radicaldesigns in the source" do
-      BandwidthUse.internal.count(:conditions => "source LIKE '%radicaldesigns%'" ).should == 27
+      BandwidthUse.internal.count(:conditions => "source LIKE '%radicaldesigns%'" ).should == 135
     end
     it "internal - grabs items ending in default" do
       BandwidthUse.internal.count(:conditions => "source LIKE '%-default'").should == 169

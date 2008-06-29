@@ -23,5 +23,10 @@ describe BatchesController do
     act!{ get :show, :id => 1 }
     it_renders :template, :show
     it_assigns :batch
+
+    describe "responds to csv format" do
+      act!{ get :show, :id => 1, :format => 'csv' }
+      it_assigns :csv_output
+    end
   end
 end

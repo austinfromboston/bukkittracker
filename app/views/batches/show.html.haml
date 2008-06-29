@@ -2,7 +2,9 @@
   = @batch.id
   = @batch.size
   = @batch.public_filename
-%h2 All Entries
+%h2 
+  All Entries
+  = link_to "Download", formatted_batch_path( @batch.id, 'csv' )
 = render :partial => 'breakouts', :locals => { :entries => @batch.entries }
 %hr
 
@@ -10,7 +12,7 @@
 = render :partial => 'breakouts', :locals => { :entries => @batch.entries.internal }
 - internal_total = 0
 %ul
-- @batch.entries.internal.count( :group => 'source' ).each do |source, qty|
+- Bukkit.bucket_qtys( @batch.entries.internal ).each do |source, qty| 
   %li
     %h3
       = "#{source}: #{qty}"
@@ -29,7 +31,7 @@
 
 - billable_total = 0
 %ul
-- @batch.entries.billable.count( :group => 'source' ).each do |source, qty|
+- Bukkit.bucket_qtys( @batch.entries.billable ).each do |source, qty| 
   %li
     %h3
       = "#{source}: #{qty}"

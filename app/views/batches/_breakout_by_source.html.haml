@@ -1,0 +1,28 @@
+%h3 Breakout by Bucket
+- total = 0
+%table
+  - Bukkit.bucket_qtys( entries).each do |source, qty| 
+    %tr
+      %td
+        %strong
+          = source
+      %td
+        = qty.to_s
+        entries
+      %td
+        - source_total = Bukkit::S3.expenses( entries.by_source( source ) )[:all]
+        - total += source_total
+        = "$#{source_total}"
+    -#%tr
+      -#= render :partial => 'breakouts', :locals => { :entries => @batch.entries.internal.by_source( source ) }
+
+  %tr
+  %td
+    %h3
+      Total
+  %td
+  %td
+    %h3
+      \$
+      = total
+

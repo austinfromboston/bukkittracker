@@ -2,6 +2,17 @@
   %ul
     - @batches.each do |batch|
       %li
-        = batch.id
-        = batch.size
-        = batch.public_filename
+        = link_to "Batch#{batch.id}", batch_path(batch)
+        .file
+          Uploaded 
+          = batch.filename
+        .size
+          = "%0.2f MB" % ( batch.size.to_f / 1.megabyte )
+        .close_date
+          Closed At:
+          = batch.closed_at.to_s(:short)
+        .period
+          Period:
+          = batch.entries.minimum(:started_at).to_s(:short)
+          \-
+          = batch.entries.maximum(:completed_at).to_s(:short)

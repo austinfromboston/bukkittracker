@@ -1,3 +1,4 @@
+%h3 Breakout by type
 .detail
   = entries.size
   entries
@@ -8,7 +9,7 @@
       - next if usage_type == :all
       %tr
         %td
-          %h4
+          %strong
             = usage_type.to_s.titleize
         %td
           = quantities[ usage_type ]
@@ -21,7 +22,8 @@
         %h3 Total
       %td
       %td
-        \$
-        = expenses[:all]
+        %h3
+          \$
+          = expenses[:all]
       
 

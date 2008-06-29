@@ -5,6 +5,7 @@
       = yield( :current_action ) || current_action
   %body
     #header
+      = render 'layouts/menu'
     #main
       = yield
     #footer

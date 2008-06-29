@@ -14,7 +14,8 @@ ActiveRecord::Schema.define(:version => 20080621004653) do
   create_table "bandwidth_uses", :force => true do |t|
     t.integer  "batch_id"
     t.string   "source"
-    t.string   "action"
+    t.string   "request_method"
+    t.string   "usage_type"
     t.string   "units"
     t.integer  "amount"
     t.datetime "completed_at"

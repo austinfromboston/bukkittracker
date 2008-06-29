@@ -1,0 +1,35 @@
+---
+expenses:
+  storage: .15
+  uploads: .10
+  downloads: .17
+  heavy_requests: .00001
+  light_requests: .000001
+
+charges:
+  storage: .15
+  uploads: .10
+  downloads: .17
+  heavy_requests: .00001
+  light_requests: .000001
+
+usage_types:
+  storage: TimedStorage
+  download: DataTransfer-Out  
+  upload: DataTransfer-In
+  heavy_request: Requests-Tier1
+  light_request: Requests-Tier2
+  no_charge: NoCharge
+
+units:
+  storage: gigabyte/months
+  downloads: bytes
+  uploads: bytes
+  heavy_requests: requests
+  light_requests: requests
+  no_charge: requests
+
+request_methods:
+  put: PutObject
+  get: GetObject, List, HeadObject
+  delete: DeleteObject

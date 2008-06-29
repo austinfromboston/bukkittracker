@@ -2,3 +2,27 @@
   = @batch.id
   = @batch.size
   = @batch.public_filename
+%h2 All Entries
+= render :partial => 'breakouts', :locals => { :entries => @batch.entries }
+
+%h2 Internal Use
+= render :partial => 'breakouts', :locals => { :entries => @batch.entries.internal }
+
+%h2 Billable Use
+= render :partial => 'breakouts', :locals => { :entries => @batch.entries.billable }
+
+- billable_total = 0
+%ul
+- @batch.entries.billable.count( :group => 'source' ).each do |source, qty|
+  %li
+    %h3
+      = "#{source}: #{qty}"
+      entries
+      - source_total = Bukkit::S3.expenses( @batch.entries.billable.by_source( source ) ).values.inject(&:+) 
+      - billable_total += source_total
+      = ":: $#{source_total}"
+    -#= render :partial => 'breakouts', :locals => { :entries => @batch.entries.billable.by_source( source ) }
+
+%h2
+  \$
+  = billable_total

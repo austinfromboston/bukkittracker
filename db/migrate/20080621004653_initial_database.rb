@@ -8,7 +8,7 @@ class InitialDatabase < ActiveRecord::Migration
 
     create_table "bandwidth_uses" do |t|
       t.integer "batch_id"
-      t.string  "source", "action", "units"
+      t.string  "source", "request_method", "usage_type", "units"
       t.integer "amount"
       t.datetime "completed_at"
     end

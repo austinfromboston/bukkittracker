@@ -5,6 +5,7 @@ require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'spec'
 require 'spec/rails'
 require 'rspec_on_rails_on_crack'
+require 'pp'
 
 Spec::Runner.configure do |config|
   # If you're not using ActiveRecord you should remove these
@@ -46,4 +47,10 @@ Spec::Runner.configure do |config|
   # == Notes
   # 
   # For more information take a look at Spec::Example::Configuration and Spec::Runner
+  def attach_sample_file(batch, sample = "#{RAILS_ROOT}/spec/fixtures/example_s3_monthly.csv" )
+    batch.stub!(:full_filename).and_return( sample )
+    batch.size = 223181
+    batch.content_type = 'text/csv'
+    batch.filename = 'example_s3_monthly.csv'
+  end
 end
